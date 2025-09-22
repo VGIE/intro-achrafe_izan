@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,10 @@ namespace IntroExercises
         //Count should return the number of times value appears in array. 0 if the array is empty/null
         public static int Count(int[] array, int value)
         {
+            if (array.Length == 0 || array == null)
+            {
+                return 0;
+            }
             int counter = 0;
             for (int i = 0; i < array.Length; i++)
             {
@@ -36,6 +41,7 @@ namespace IntroExercises
                 }
             }
             return counter;
+            
         }
 
         //TODO #3
@@ -43,7 +49,14 @@ namespace IntroExercises
         //-1 if endIndex is less than startIndex or any of them is outside the array
         public static int Find(int[] array, int value, int startIndex, int endIndex)
         {
-            return 0;
+            for (int i = startIndex; i <= endIndex; i++)
+            {
+                if (array[i] == value)
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
 
         //TODO #4
@@ -52,7 +65,22 @@ namespace IntroExercises
 
         public static int Count(int[] array, int value, int startIndex, int endIndex)
         {
-            return 0;
+            int counter = 0;
+
+            if (startIndex < 0 || endIndex > array.Length || endIndex < startIndex || !array.Contains(value) || array == null || array.Length == 0)
+            {
+                return 0;
+            }
+
+            for (int i = startIndex; i <= endIndex; i++)
+            {
+                if (array[i] == value)
+                {
+                    counter++;
+                }
+            }
+            return counter;
+            
         }
 
         //TODO #5
@@ -65,7 +93,28 @@ namespace IntroExercises
         //  AreEqual(null, null) => false
         public static bool AreEqual(int[] A, int[] B)
         {
-            return true;
+            bool boolean = false;
+            int contador1 = 0;
+            int contador2 = 0;
+
+            if (A.Length == B.Length)
+            {
+                for (int i = 0; i < A.Length; i++)
+                {
+                    contador1 = Count(A, A[i], i, A.Length);
+                    contador2 = Count(B, B[i], i, B.Length);
+
+                    if (contador1 == contador2)
+                    {
+                        boolean = true;
+                    }
+                    else
+                    {
+                        boolean = false;
+                    }
+                }
+            }
+            return boolean;
         }
     }
 }
